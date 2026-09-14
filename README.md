@@ -2,6 +2,22 @@
 
 > Deliverability monitoring from DMARC aggregate reports, separating 'never arrived' from 'arrived and ignored'.
 
+## Live deployment
+
+[![CI and deployment](https://github.com/SlateGitOrg/dmarcwatch/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SlateGitOrg/dmarcwatch/actions/workflows/ci.yml)
+
+[Open the interactive DMARC Watch demo](https://slategitorg.github.io/dmarcwatch/)
+
+The deployed interface uses a deterministic offline scenario to make the repository's tested decision rule visible without external services or private data.
+
+### Desktop
+
+![DMARC Watch desktop deployment](docs/assets/deployed-desktop.png)
+
+### Mobile
+
+<img src="docs/assets/deployed-mobile.png" alt="DMARC Watch mobile deployment" width="390">
+
 > **Implementation note.** The runnable reference is zero-dependency
 > TypeScript on Node 24 (native type stripping): a hand-rolled XML reader,
 > in-memory analysis instead of SQLite/PostgreSQL, a console report
