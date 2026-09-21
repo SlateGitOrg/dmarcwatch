@@ -1,1 +1,35 @@
-<!doctype html><html lang="en" class="ops-console"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Separate mail that never arrived from mail that arrived and was ignored."><meta name="theme-color" content="#101820"><title>DMARC Watch — Live demo</title><link rel="stylesheet" href="./styles.css"></head><body><div class="shell"><nav class="topbar" aria-label="Primary"><a class="brand" href="./"><span class="brand-mark">S</span>DMARC Watch</a><a class="repo-link" href="https://github.com/SlateGitOrg/dmarcwatch">View source on GitHub</a></nav><main><header class="hero"><div><p class="kicker">Deliverability operations</p><h1>Separate mail that never arrived from mail that arrived and was ignored.</h1></div><div class="hero-side"><p>This interactive browser scenario makes the repository's tested decision rule visible. Adjust the operating condition and inspect what changes.</p><div class="status" role="status"><span class="status-dot" aria-hidden="true"></span>Domain protected</div></div></header><section class="visual" aria-label="Interactive project view"><div class="telemetry" aria-label="Live Deliverability operations signals"><section class="telemetry-row"><div><span>SPF</span><strong>Nominal</strong></div><svg viewBox="0 0 420 74" aria-hidden="true"><path class="trace trace-0" d="M0 46 L32 42 L68 48 L104 31 L140 38 L178 22 L214 35 L250 18 L286 30 L322 20 L358 28 L420 16"/></svg><time>12 ms</time></section><section class="telemetry-row"><div><span>DKIM</span><strong>Watching</strong></div><svg viewBox="0 0 420 74" aria-hidden="true"><path class="trace trace-1" d="M0 41 L32 44 L68 44 L104 35 L140 36 L178 27 L214 32 L250 25 L286 28 L322 24 L358 25 L420 18"/></svg><time>29 ms</time></section><section class="telemetry-row"><div><span>Alignment</span><strong>Nominal</strong></div><svg viewBox="0 0 420 74" aria-hidden="true"><path class="trace trace-2" d="M0 36 L32 46 L68 40 L104 39 L140 34 L178 32 L214 29 L250 32 L286 26 L322 28 L358 22 L420 20"/></svg><time>46 ms</time></section></div></section><aside class="panel"><div class="metric"><strong id="primary-metric" aria-live="polite">98.7%</strong><span>authenticated mail</span></div><div class="control"><label for="scenario-range"><span>Quarantine policy</span><output id="scenario-output" for="scenario-range">75%</output></label><input id="scenario-range" type="range" min="0" max="100" value="75" aria-label="Quarantine policy"></div><div class="facts"><div class="fact"><strong>0.4%</strong><span>reject rate</span></div><div class="fact"><strong>3</strong><span>new senders</span></div><div class="fact"><strong>24h</strong><span>report window</span></div></div></aside><footer class="demo-note"><p>Representative offline scenario. The repository's native test suite verifies the core behavior; this page visualizes its decision path without external services or private data.</p><a href="https://github.com/SlateGitOrg/dmarcwatch#readme">Read the engineering case study</a></footer></main></div><script src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Paste a DMARC aggregate report and separate authentication failures from policy suppression.">
+  <title>DMARC Watch · Working Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#results">Skip to results</a>
+  <header class="masthead"><a class="brand" href="https://github.com/SlateGitOrg/dmarcwatch">DMARC Watch</a><span class="build-state"><i></i> live computation</span></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">Deliverability forensics</p>
+      <h1>Run the decision,<br><em>inspect the evidence.</em></h1>
+      <p class="lede">Paste a DMARC aggregate report and separate authentication failures from policy suppression.</p>
+    </section>
+    <section class="workspace" aria-label="Interactive project workspace">
+      <form id="workspace-form" class="control-panel">
+        <div class="panel-heading"><span>01</span><div><p>Inputs</p><h2>Configure the run</h2></div></div>
+        <div class="fields"><label class="field" for="xml"><span>DMARC aggregate XML</span><textarea id="xml" name="xml" rows="16">&lt;feedback&gt;&lt;record&gt;&lt;row&gt;&lt;source_ip&gt;198.51.100.10&lt;/source_ip&gt;&lt;count&gt;820&lt;/count&gt;&lt;policy_evaluated&gt;&lt;dkim&gt;pass&lt;/dkim&gt;&lt;spf&gt;pass&lt;/spf&gt;&lt;disposition&gt;none&lt;/disposition&gt;&lt;/policy_evaluated&gt;&lt;/row&gt;&lt;/record&gt;&lt;record&gt;&lt;row&gt;&lt;source_ip&gt;203.0.113.55&lt;/source_ip&gt;&lt;count&gt;94&lt;/count&gt;&lt;policy_evaluated&gt;&lt;dkim&gt;fail&lt;/dkim&gt;&lt;spf&gt;fail&lt;/spf&gt;&lt;disposition&gt;reject&lt;/disposition&gt;&lt;/policy_evaluated&gt;&lt;/row&gt;&lt;/record&gt;&lt;/feedback&gt;</textarea></label>
+<label class="field" for="policyMode"><span>Suppression classification</span><select id="policyMode" name="policyMode"><option selected>Strict</option><option>Authentication only</option></select></label></div>
+        <div class="actions"><button class="run" type="submit">Run analysis <span>→</span></button><button id="reset-button" class="reset" type="button">Reset</button></div>
+      </form>
+      <section id="results" class="result-panel" aria-live="polite" aria-busy="true">
+        <div class="panel-heading"><span>02</span><div><p>Output</p><h2>Decision trace</h2></div></div>
+        <div id="result-content" class="result-content"><div class="loading">Computing initial scenario…</div></div>
+      </section>
+    </section>
+  </main>
+  <footer><p>Built from the tested logic in <a href="https://github.com/SlateGitOrg/dmarcwatch">SlateGitOrg/dmarcwatch</a>.</p><p>Interactive capstone · Sneha Chandra</p></footer>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
