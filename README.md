@@ -83,7 +83,7 @@ Design notes:
 
 - The "is this change real?" threshold uses the standard error of the difference between two rates at 1.96. Using a single rate's error called noise an engagement drop on a no-change control.
 - Quarantined and rejected mail counts as never arrived, so open rate is computed over delivered mail only.
-- Spoofing needs at least 4 unfamiliar sources with no alignment evidence; with fewer it flags nothing rather than invent a volume cut-off.
+- Spoofing is only tested when there are at least 4 unknown sources with no alignment evidence (`minPeerGroup`, default 4); with fewer it flags nothing rather than invent a volume cut-off.
 
 ## Testing
 

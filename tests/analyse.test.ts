@@ -65,8 +65,8 @@ describe('the split: deliverability failure vs engagement failure', () => {
   it('the generic fix - counting quarantined mail as delivered - does NOT recover it', () => {
     // This is the same computation with the one decision removed: treat every
     // message the provider reported as "sent" as though it had arrived. If the
-    // differentiator were implemented the obvious way, this is the answer it
-    // would give, and it is wrong by ~70 standard errors.
+    // denominator decision were skipped and the obvious computation used, this
+    // is the answer it would give, and it is wrong by ~70 standard errors.
     const genericCurrentRate = sum(current.map((d) => d.opens)) / sum(current.map((d) => d.sent));
     const se = seOfDifference(truth.trueOpenRate, delivered(baseline), delivered(current));
     assert.ok(
